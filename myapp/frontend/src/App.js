@@ -3,6 +3,9 @@ import './App.css';
 import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
 import Appointment from './Appointment/Appointment';
 import MachineInfo from './MachineInfo/MachineInfo';
+import CheckCalendar from './Appointment/CheckCalendar/CheckCalendar';
+import MakeAppointmentForm from './Appointment/MakeAppointmentForm/MakeAppointmentForm';
+
 
 function App() {
     return (
@@ -10,7 +13,7 @@ function App() {
             <Routes>
                 <Route path="/" element={
                     <div className="App">
-                        <h1>Quality Care App</h1>
+                        <h1>ExcellaCare Planner</h1>
                         <div className="custom-button-group">
                             <Link to="/appointment" className="custom-button">Appointment Scheduler</Link>
                             <br/>
@@ -19,6 +22,8 @@ function App() {
                     </div>
                 }/>
                 <Route path="/appointment" element={<Appointment/>}/>
+                <Route path="/appointment/check-calendar" element={<CheckCalendar/>}/>
+                <Route path="/appointment/make-appointment" element={<MakeAppointmentForm/>}/>
                 <Route path="/machine-info" element={<MachineInfo/>}/>
             </Routes>
         </Router>
