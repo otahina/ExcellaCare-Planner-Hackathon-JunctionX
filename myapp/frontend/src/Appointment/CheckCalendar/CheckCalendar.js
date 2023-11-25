@@ -1,28 +1,45 @@
 import React, {useState} from 'react';
 import './CheckCalendar.css';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faBed} from '@fortawesome/free-solid-svg-icons';
 
 function CheckCalendar() {
+
+    // For Selected Recommended Button
+    const [selectedEvents, setSelectedEvents] = useState([]);
 
     // New state to track events moved to the right box
     const [movedEvents, setMovedEvents] = useState([]);
 
     const [isChoosePatientsActive, setIsChoosePatientsActive] = useState(false);
 
+    const [showMachineDetails, setShowMachineDetails] = useState(false);
+
     const handleEventClick = (clickedEvent) => {
-         if (!isChoosePatientsActive) return;
-        setMovedEvents(prevEvents => {
-            // Check if the event is already moved by checking both title and day
-            const isEventMoved = prevEvents.some(event =>
-                event.title === clickedEvent.title && event.day === clickedEvent.day
-            );
-            if (isEventMoved) {
-                // If the event is already moved, just return the current state.
-                return prevEvents;
-            } else {
-                // Add the clicked event to the movedEvents array
+        const eventId = `${clickedEvent.title}-${clickedEvent.day}-${clickedEvent.startTime}-${clickedEvent.endTime}`;
+
+        // Toggle selection for Recommended events
+        if (clickedEvent.title === 'Recommended') {
+            setSelectedEvents(prevSelectedEvents => {
+                const isEventSelected = prevSelectedEvents.includes(eventId);
+                if (isEventSelected) {
+                    return prevSelectedEvents.filter(id => id !== eventId);
+                } else {
+                    return [...prevSelectedEvents, eventId];
+                }
+            });
+        }
+
+        // Move other events when isChoosePatientsActive is true
+        if (isChoosePatientsActive) {
+            setMovedEvents(prevEvents => {
+                const isEventMoved = prevEvents.some(event =>
+                    event.title === clickedEvent.title && event.day === clickedEvent.day
+                );
+                if (isEventMoved) return prevEvents;
                 return [...prevEvents, clickedEvent];
-            }
-        });
+            });
+        }
     };
 
     const handleChoosePatientsClick = () => {
@@ -55,11 +72,11 @@ function CheckCalendar() {
         {startTime: 9.1, endTime: 9.35, day: 3, title: 'PID: 005', type: 'unique'},
         {startTime: 9.35, endTime: 9.6, day: 4, title: 'PID: 005', type: 'unique'},
 
-        {startTime: 11, endTime: 11.25, day: 0, title: 'PID: 004', type: 'unique'},
-        {startTime: 11, endTime: 11.25, day: 1, title: 'PID: 004', type: 'unique'},
-        {startTime: 11, endTime: 11.25, day: 2, title: 'PID: 004', type: 'unique'},
-        {startTime: 11, endTime: 11.25, day: 3, title: 'PID: 004', type: 'unique'},
-        {startTime: 11, endTime: 11.25, day: 4, title: 'PID: 004', type: 'unique'},
+        {startTime: 10.6, endTime: 10.9, day: 0, title: 'PID: 004', type: 'unique'},
+        {startTime: 10.6, endTime: 10.9, day: 1, title: 'PID: 004', type: 'unique'},
+        {startTime: 10.6, endTime: 10.9, day: 2, title: 'PID: 004', type: 'unique'},
+        {startTime: 10.6, endTime: 10.9, day: 3, title: 'PID: 004', type: 'unique'},
+        {startTime: 10.6, endTime: 10.9, day: 4, title: 'PID: 004', type: 'unique'},
 
         {startTime: 9.6, endTime: 9.9, day: 0, title: 'PID: 006', type: 'unique'},
         {startTime: 9.6, endTime: 9.9, day: 1, title: 'PID: 006', type: 'unique'},
@@ -129,28 +146,84 @@ function CheckCalendar() {
         {startTime: 10.05, endTime: 10.3, day: 2, title: 'PID: 017', type: 'trueBeam'},
         {startTime: 10.05, endTime: 10.3, day: 3, title: 'PID: 017', type: 'trueBeam'},
         {startTime: 10.05, endTime: 10.3, day: 4, title: 'PID: 017', type: 'trueBeam'},
+        {startTime: 10.6, endTime: 11, day: 1, title: 'PID: 019', type: 'trueBeam'},
+        {startTime: 10.6, endTime: 11, day: 2, title: 'PID: 019', type: 'trueBeam'},
+        {startTime: 10.6, endTime: 11, day: 3, title: 'PID: 019', type: 'trueBeam'},
+        {startTime: 10.6, endTime: 11, day: 4, title: 'PID: 019', type: 'trueBeam'},
 
 
-        {startTime: 10, endTime: 10.5, day: 2, title: 'PatientC', type: 'vitalBeam'},
-        {startTime: 10, endTime: 10.5, day: 3, title: 'PatientC', type: 'vitalBeam'},
-        {startTime: 10, endTime: 10.5, day: 4, title: 'PatientC', type: 'vitalBeam'},
-        {startTime: 10, endTime: 10.5, day: 5, title: 'PatientC', type: 'vitalBeam'},
-        {startTime: 11, endTime: 11.25, day: 1, title: 'PatientH', type: 'trueBeam'},
-        {startTime: 11, endTime: 11.25, day: 2, title: 'PatientH', type: 'trueBeam'},
-        {startTime: 11, endTime: 11.25, day: 3, title: 'PatientH', type: 'trueBeam'},
-        {startTime: 11, endTime: 11.25, day: 4, title: 'PatientH', type: 'trueBeam'},
-        // ... more events
+        // VitalBeam
+        {startTime: 10.2, endTime: 10.5, day: 2, title: 'PID: 020', type: 'vitalBeam'},
+        {startTime: 10.2, endTime: 10.5, day: 3, title: 'PID: 020', type: 'vitalBeam'},
+        {startTime: 10.2, endTime: 10.5, day: 4, title: 'PID: 020', type: 'vitalBeam'},
+        {startTime: 10.2, endTime: 10.5, day: 2, title: 'PID: 021', type: 'vitalBeam'},
+        {startTime: 10.2, endTime: 10.5, day: 3, title: 'PID: 021', type: 'vitalBeam'},
+        {startTime: 10.2, endTime: 10.5, day: 4, title: 'PID: 021', type: 'vitalBeam'},
+        {startTime: 9.0, endTime: 9.25, day: 0, title: 'PID: 022', type: 'vitalBeam'},
+        {startTime: 9.0, endTime: 9.25, day: 1, title: 'PID: 022', type: 'vitalBeam'},
+        {startTime: 9.0, endTime: 9.25, day: 2, title: 'PID: 022', type: 'vitalBeam'},
+        {startTime: 9.0, endTime: 9.25, day: 3, title: 'PID: 022', type: 'vitalBeam'},
+        {startTime: 9.0, endTime: 9.25, day: 4, title: 'PID: 022', type: 'vitalBeam'},
+        {startTime: 9.0, endTime: 9.25, day: 0, title: 'PID: 030', type: 'vitalBeam'},
+        {startTime: 9.0, endTime: 9.25, day: 1, title: 'PID: 030', type: 'vitalBeam'},
+        {startTime: 9.0, endTime: 9.25, day: 2, title: 'PID: 030', type: 'vitalBeam'},
+        {startTime: 9.0, endTime: 9.25, day: 3, title: 'PID: 030', type: 'vitalBeam'},
+        {startTime: 9.0, endTime: 9.25, day: 4, title: 'PID: 030', type: 'vitalBeam'},
+        {startTime: 9.1, endTime: 9.35, day: 0, title: 'PID: 044', type: 'vitalBeam'},
+        {startTime: 9.1, endTime: 9.35, day: 1, title: 'PID: 044', type: 'vitalBeam'},
+        {startTime: 9.1, endTime: 9.35, day: 2, title: 'PID: 044', type: 'vitalBeam'},
+        {startTime: 9.1, endTime: 9.35, day: 3, title: 'PID: 044', type: 'vitalBeam'},
+        {startTime: 9.1, endTime: 9.35, day: 4, title: 'PID: 044', type: 'vitalBeam'},
+        {startTime: 9.1, endTime: 9.35, day: 0, title: 'PID: 031', type: 'vitalBeam'},
+        {startTime: 9.1, endTime: 9.35, day: 1, title: 'PID: 031', type: 'vitalBeam'},
+        {startTime: 9.1, endTime: 9.35, day: 2, title: 'PID: 031', type: 'vitalBeam'},
+        {startTime: 9.1, endTime: 9.35, day: 3, title: 'PID: 031', type: 'vitalBeam'},
+        {startTime: 9.55, endTime: 9.8, day: 0, title: 'PID: 035', type: 'vitalBeam'},
+        {startTime: 9.55, endTime: 9.8, day: 1, title: 'PID: 035', type: 'vitalBeam'},
+        {startTime: 9.55, endTime: 9.8, day: 2, title: 'PID: 035', type: 'vitalBeam'},
+        {startTime: 9.55, endTime: 9.8, day: 3, title: 'PID: 035', type: 'vitalBeam'},
+        {startTime: 9.55, endTime: 9.8, day: 4, title: 'PID: 035', type: 'vitalBeam'},
+        {startTime: 9.55, endTime: 9.8, day: 0, title: 'PID: 037', type: 'vitalBeam'},
+        {startTime: 9.55, endTime: 9.8, day: 1, title: 'PID: 037', type: 'vitalBeam'},
+        {startTime: 9.55, endTime: 9.8, day: 2, title: 'PID: 037', type: 'vitalBeam'},
+        {startTime: 9.55, endTime: 9.8, day: 3, title: 'PID: 037', type: 'vitalBeam'},
+        {startTime: 9.55, endTime: 9.8, day: 4, title: 'PID: 037', type: 'vitalBeam'},
+        {startTime: 9.26, endTime: 9.6, day: 1, title: 'PID: 038', type: 'vitalBeam'},
+        {startTime: 9.26, endTime: 9.6, day: 2, title: 'PID: 038', type: 'vitalBeam'},
+        {startTime: 9.26, endTime: 9.6, day: 3, title: 'PID: 038', type: 'vitalBeam'},
+        {startTime: 9.26, endTime: 9.6, day: 4, title: 'PID: 038', type: 'vitalBeam'},
+        {startTime: 10.5, endTime: 10.75, day: 4, title: 'PID: 058', type: 'vitalBeam'},
+        {startTime: 10.5, endTime: 10.75, day: 0, title: 'PID: 058', type: 'vitalBeam'},
+        {startTime: 10.5, endTime: 10.75, day: 1, title: 'PID: 058', type: 'vitalBeam'},
+        {startTime: 10.5, endTime: 10.75, day: 2, title: 'PID: 058', type: 'vitalBeam'},
+        {startTime: 10.5, endTime: 10.75, day: 3, title: 'PID: 058', type: 'vitalBeam'},
+        {startTime: 10.5, endTime: 10.75, day: 4, title: 'PID: 058', type: 'vitalBeam'},
+        {startTime: 10.5, endTime: 10.75, day: 0, title: 'PID: 059', type: 'vitalBeam'},
+        {startTime: 10.5, endTime: 10.75, day: 1, title: 'PID: 059', type: 'vitalBeam'},
+        {startTime: 10.5, endTime: 10.75, day: 2, title: 'PID: 059', type: 'vitalBeam'},
+        {startTime: 10.5, endTime: 10.75, day: 3, title: 'PID: 059', type: 'vitalBeam'},
 
         // Recommended Time
-        {startTime: 11, endTime: 11.25, day: 0, title: 'Recommended', type: 'trueBeam'},
-        {startTime: 11, endTime: 11.25, day: 1, title: 'Recommended', type: 'trueBeam'},
-        {startTime: 11, endTime: 11.25, day: 2, title: 'Recommended', type: 'trueBeam'},
-        {startTime: 11, endTime: 11.25, day: 3, title: 'Recommended', type: 'trueBeam'},
+        {startTime: 10.5, endTime: 10.75, day: 0, title: 'Recommended', type: 'trueBeam'},
+        {startTime: 10.5, endTime: 10.75, day: 1, title: 'Recommended', type: 'trueBeam'},
+        {startTime: 10.5, endTime: 10.75, day: 2, title: 'Recommended', type: 'trueBeam'},
+        {startTime: 10.5, endTime: 10.75, day: 3, title: 'Recommended', type: 'trueBeam'},
+        {startTime: 10.5, endTime: 10.75, day: 4, title: 'Recommended', type: 'trueBeam'},
         {startTime: 9.5, endTime: 9.75, day: 0, title: 'Recommended', type: 'trueBeam'},
         {startTime: 9.5, endTime: 9.75, day: 1, title: 'Recommended', type: 'trueBeam'},
         {startTime: 9.5, endTime: 9.75, day: 2, title: 'Recommended', type: 'trueBeam'},
         {startTime: 9.5, endTime: 9.75, day: 3, title: 'Recommended', type: 'trueBeam'},
         {startTime: 9.5, endTime: 9.75, day: 4, title: 'Recommended', type: 'trueBeam'},
+        {startTime: 9.26, endTime: 9.6, day: 0, title: 'Recommended', type: 'vitalBeam'},
+        {startTime: 9.26, endTime: 9.6, day: 1, title: 'Recommended', type: 'vitalBeam'},
+        {startTime: 9.26, endTime: 9.6, day: 2, title: 'Recommended', type: 'vitalBeam'},
+        {startTime: 9.26, endTime: 9.6, day: 3, title: 'Recommended', type: 'vitalBeam'},
+        {startTime: 9.26, endTime: 9.6, day: 4, title: 'Recommended', type: 'vitalBeam'},
+        {startTime: 9.76, endTime: 10.2, day: 4, title: 'Recommended', type: 'vitalBeam'},
+        {startTime: 9.76, endTime: 10.2, day: 3, title: 'Recommended', type: 'vitalBeam'},
+        {startTime: 9.76, endTime: 10.2, day: 2, title: 'Recommended', type: 'vitalBeam'},
+        {startTime: 9.76, endTime: 10.2, day: 1, title: 'Recommended', type: 'vitalBeam'},
+        {startTime: 9.76, endTime: 10.2, day: 0, title: 'Recommended', type: 'vitalBeam'},
 
     ];
 
@@ -163,6 +236,7 @@ function CheckCalendar() {
     // Filter events based on the selected machine
     const filteredEvents = events.filter(event => event.type === selectedMachine);
 
+
     const times = [];
     for (let hour = 9; hour <= 11; hour++) {
         times.push(`${hour}:00`);
@@ -172,11 +246,20 @@ function CheckCalendar() {
     }
 
     const machineDetailsMapping = {
-        trueBeam: ['Machine 1', 'Machine 2'],
-        vitalBeam: ['Machine 3', 'Machine 4'],
-        unique: ['Machine Information: No.5: Status: Working']
+        trueBeam: ['TrueBeam 1: Status: Working', 'TrueBeam 2: Status: Working'],
+        vitalBeam: ['VitalBeam 1: Status: Maintenance within 3 days', 'VitalBeam 2: Status: Working'],
+        unique: ['Unique 1: Status: Working']
     };
 
+    const machineColorMapping = {
+        'TrueBeam 1: Status: Working': '#8ccfff',
+        'TrueBeam 2: Status: Working': '#007bff',
+        'VitalBeam 1: Status: Maintenance within 3 days': '#ffff8c',
+        'VitalBeam 2: Status: Working': 'yellow',
+        'Unique 1: Status: Working': 'lightgreen'
+    };
+
+    const defaultColor = 'gray';
 
     const grid = times.map(time => {
         const timeParts = time.split(':');
@@ -204,23 +287,32 @@ function CheckCalendar() {
                                     // Calculate the left position based on the index to avoid overlap
                                     const eventLeft = eventIndex * (100 / dayEvents.length);
                                     // Calculate the width to give space for multiple events
-                                    const eventWidth = 100 / dayEvents.length;
-                                    const eventClass =
-                                        `event ${event.type} ${eventIndex === 0 ? 'first' : 'second'} 
-                                        ${event.title === 'Recommended' ? 'recommended' : ''}`;
+                                    const eventWidth = Math.min(50, 100 / dayEvents.length);
+
+                                    const eventClass = (event, eventIndex) => {
+                                        const eventId = `${event.title}-${event.day}-${event.startTime}-${event.endTime}`;
+                                        return `event ${event.type} ${eventIndex === 0 ? 'first' : 'second'} 
+                                            ${event.title === 'Recommended' ? 'recommended' : ''} 
+                                            ${selectedEvents.includes(eventId) ? 'selected' : ''}`;
+                                    };
+
 
                                     return (
                                         <div
                                             key={event.title}
-                                            className={eventClass}
+                                            className={eventClass(event, eventIndex)}
                                             style={{
                                                 top: `${eventTop}px`,
                                                 left: `${eventLeft}%`,
                                                 height: `${eventHeight}px`,
                                                 width: `${eventWidth}%`,
+                                                color: (event.title === 'PID: 016' || event.title === 'PID: 037') ? 'red' : 'black',
                                             }}
                                             onClick={() => handleEventClick(event)}
                                         >
+                                            {(event.title === 'PID: 016' || event.title === 'PID: 037') && (
+                                                <FontAwesomeIcon icon={faBed}/>
+                                            )}
                                             {event.title}
                                         </div>
                                     );
@@ -263,13 +355,33 @@ function CheckCalendar() {
                             Unique
                         </button>
                     </div>
-                    <div className="machine-detail">
-                        {machineDetailsMapping[selectedMachine]?.map((machineName, index) => (
-                            <p key={index}>{machineName}</p>
-                        ))}
-                    </div>
+                    <p className="machine-info">
+                        Technical Info
+                        <button className="toggle-button" onClick={() => setShowMachineDetails(prev => !prev)}>
+                            {showMachineDetails ? '▲' : '▼'}
+                        </button>
+                    </p>
+                    {showMachineDetails && (
+                        <div className="machine-detail">
+                            {machineDetailsMapping[selectedMachine]?.map((machineName, index) => (
+                                <p key={index}
+                                   style={{
+                                       backgroundColor: machineColorMapping[machineName] || defaultColor,
+                                       padding: '0.5em',
+                                       marginRight: '0.5em',
+                                       fontSize: '15px',
+                                       fontWeight: '600',
+                                       borderRadius: '0.5em'
+                                   }}
+                                >
+                                    {machineName}
+                                </p>
+                            ))}
+                            <p className="pid-info">PID(Patient ID)'s text color is black > Patients, red > Inpatients</p>
+                        </div>
+                    )}
                     <div className="calendar-header">
-                        <div className="time-header"></div>
+                        <div className="time-header">Time</div>
                         {['1 Mon', '2 Tue', '3 Wed', '4 Thu', '5 Fri'].map(day => (
                             <div className="date-header" key={day}>{`11/${day}`}</div>
                         ))}
@@ -287,13 +399,15 @@ function CheckCalendar() {
                             <p className="true-beam-color-for-patient">TrueBeam</p>
                             <p className="vital-beam-color-for-patient">VitalBeam</p>
                         </div>
-                        <p>Pelvis Cancer</p>
-                        <p>Stage 3</p>
+                        <p>Type of Cancer: Pelvis</p>
+                        <p>Cancer Stage: 3</p>
+                        <p>Fraction Number: 23</p>
                     </div>
-                     <h3>Excluded Patient</h3>
+                    <h3>Excluded Patient</h3>
                     <div className="right-box-box exclude-patient">
                         <button className={`start-button ${isChoosePatientsActive ? 'start-button-active' : ''}`}
-                                onClick={handleChoosePatientsClick}>Choose patients</button>
+                                onClick={handleChoosePatientsClick}>Choose patients
+                        </button>
                         {/* Render moved events here */}
                         {movedEvents.map(event => (
                             <div key={event.title} className={`moved-event ${event.type}`}>

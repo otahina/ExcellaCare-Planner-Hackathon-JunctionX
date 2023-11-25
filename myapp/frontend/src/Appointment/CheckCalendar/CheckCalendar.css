@@ -50,6 +50,10 @@
     margin: 0 1em 0 1em;
 }
 
+.machine-color-patient p {
+    margin: 0.3em;
+}
+
 .patient-data {
     padding: 1em;
     border-radius: 1em;
@@ -75,6 +79,7 @@
     width: 5em;
     color: white;
     margin-right: 0.5em;
+    border: 1px solid black;
 }
 
 .vital-beam-color-for-patient {
@@ -83,6 +88,7 @@
     padding: 0.3em;
     width: 5em;
     color: white;
+    border: 1px solid black;
 }
 
 .exclude-patient {
@@ -103,9 +109,10 @@
     flex-direction: column;
 }
 
-.calendar-main h4 {
+.calendar-main h4, .machine-info {
     margin: 0.5em 0.5em 0.5em 2em;
     padding: 0;
+    font-weight: 600;
 }
 
 .machine-color {
@@ -119,6 +126,11 @@
     display: flex;
     width: 100%;
     margin-left: 2em;
+}
+
+.pid-info{
+    margin-left: 1em;
+    padding-top: 0.5em;
 }
 
 .button {
@@ -190,12 +202,18 @@
     background-color: #ddd;
     border-bottom: 2px solid black;
     border-top: 2px solid black;
-    margin-bottom: 0.5em;
+    margin-bottom: 0;
 }
 
 .time-header {
     width: 50px; /* Adjust as needed */
-    content: "Time";
+    border-right: 2px solid black;
+    text-align: center;
+    padding-top: 0.5em;
+}
+
+.machine-info .toggle-button {
+    margin-left: 10px;
 }
 
 .date-header {
@@ -203,6 +221,15 @@
     text-align: center;
     background-color: #ddd;
     padding: 10px;
+}
+
+.date-header {
+    border-right: 2px solid black;
+}
+
+
+.date-header:last-child{
+    border-right: 2px solid black;
 }
 
 .calendar-grid {
@@ -219,8 +246,9 @@
 }
 .time {
     width: 3em; /* Adjust as needed */
-    text-align: right;
-    padding-right: 10px;
+    text-align: center;
+    padding-right: 0;
+    padding-left: 0;
     position: sticky;
     left: 0;
     background-color: white;
@@ -235,7 +263,7 @@
 .day-slot {
     flex: 1;
     border-bottom: 1px dotted grey;
-    border-right: 1px solid grey;
+    border-right: 1px solid black;
     position: relative;
     height: 40px;
 }
@@ -254,12 +282,14 @@
 
 
 .moved-event {
-    /* Add styles for events in the right box */
     padding: 5px;
-    margin-bottom: 5px; /* Add space between events */
-    border: 1px solid #ccc;
-    background-color: orangered;
+    margin-top: 0.5em;
+    margin-bottom: 5px;
+    background-color: lightgray;
     cursor: default;
+    width: 200px;
+    border-radius: 0.5em;
+    border: 1px solid black;
 }
 
 .confirm{
@@ -311,17 +341,30 @@
     border-radius: 0.5em;
 }
 
-.event.trueBeam.recommended {
-    background-color: hotpink;
-    border: thick solid black;
-}
-
-.event.vitalBeam {
+.event.vitalBeam.first {
     background-color: #ffff8c;
     width: 100%;
     height: 100%;
     border-radius: 0.5em;
 }
+
+.event.vitalBeam.second {
+    background-color: yellow;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5em;
+}
+
+.event.trueBeam.recommended, .event.vitalBeam.recommended {
+    background-color: hotpink;
+    border: thick solid black;
+}
+
+.event.trueBeam.recommended.selected {
+    background-color: #98FB98;
+}
+
+
 
 .event.unique {
     background-color: lightgreen;
