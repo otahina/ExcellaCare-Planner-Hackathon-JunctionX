@@ -1,23 +1,336 @@
 .header-wrapper {
     display: flex;
     justify-content: space-between;
+    padding: 1em;
     align-items: center;
-    padding: 0 2em;
-    background-color: #f5f5f5;
-    height: 4em;
-    margin: 0;
+    background-color: #ddd !important;
+}
 
+.calendar-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f5f5f5;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .calendar-wrapper {
-    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.right-box {
     background-color: #f5f5f5;
-    font-family: 'Open Sans', sans-serif;
-    height: 100vh;
+    margin-top: 2em;
+    width: 20%;
+    flex-shrink: 0;
+    height: 80%;
+}
+
+.right-box h3 {
     margin: 0;
+    padding: 0;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 0.5em;
+}
+
+.right-box-box {
+    background-color: white;
+    border: black thin solid;
+    height: 35%;
+    margin: 1em;
+}
+
+.machine-color-patient {
+    display: flex;
+    width: 100%;
+    margin: 0 1em 0 1em;
+}
+
+.patient-data {
+    padding: 1em;
+    border-radius: 1em;
+    background-color: #ffc5d3;
+    font-weight: 600;
+}
+
+.patient-data h3 {
+    border-bottom: 2px solid black;
+    margin: 0;
+    text-align: left;
+}
+
+.recommended-machine {
+    margin: 0.5em;
+    font-size: 15px;
+}
+
+.true-beam-color-for-patient {
+    border-radius: 0.5em;
+    background-color: #4361EE;
+    padding: 0.3em;
+    width: 5em;
+    color: white;
+    margin-right: 0.5em;
+}
+
+.vital-beam-color-for-patient {
+    border-radius: 0.5em;
+    background-color: darkorange;
+    padding: 0.3em;
+    width: 5em;
+    color: white;
+}
+
+.exclude-patient {
+    border-radius: 1em;
+    background-color: antiquewhite;
+    padding: 0.5em;
+    overflow: auto;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-grow: 1;
+}
+
+.calendar-main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.calendar-main h4 {
+    margin: 0.5em 0.5em 0.5em 2em;
+    padding: 0;
+}
+
+.machine-color {
+    display: flex;
+    width: 100%;
+    margin: 0 1em 0 1em;
+    font-weight: 600;
+}
+
+.machine-detail{
+    display: flex;
+    width: 100%;
+    margin-left: 2em;
+}
+
+.button {
+    padding: 0.5em;
+    margin: 0.5em;
+    border-radius: 0.3em;
+    font-weight: 300;
+    width: 8em;
+    cursor: pointer;
+    border: none;
+    font-size: 15px;
+    transition: transform 0.3s ease;
+}
+
+.button:hover {
+   transform: scale(1.07);
+}
+
+.true-beam-color {
+    background-color: #4361EE;
+    color: white;
+    padding: 0.5em;
+    font-size: 17px;
+    margin: 0.5em;
+    border-radius: 0.3em;
+    font-weight: 300;
+    width: 8em;
+}
+
+.vital-beam-color {
+    background-color: darkorange;
+    color: white;
+    padding: 0.5em;
+    font-size: 17px;
+    margin: 0.5em;
+    border-radius: 0.3em;
+    font-weight: 300;
+    width: 8em;
+}
+
+.unique-color {
+    background-color: forestgreen;
+    color: white;
+    padding: 0.5em;
+    font-size: 17px;
+    margin: 0.5em;
+    border-radius: 0.3em;
+    font-weight: 300;
+    width: 8em;
+}
+
+.button.active {
+    border: 4px solid #000;
+}
+
+.machine-color h4 {
+    display: inline-block;
+    width: 20%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
 }
 
 .calendar-header {
-    margin: 0;
-    padding: 2em 0.5em 2em 0.5em;
+    display: flex;
+    width: 100%;
+    background-color: #ddd;
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+    margin-bottom: 0.5em;
 }
+
+.time-header {
+    width: 50px; /* Adjust as needed */
+    content: "Time";
+}
+
+.date-header {
+    flex: 1;
+    text-align: center;
+    background-color: #ddd;
+    padding: 10px;
+}
+
+.calendar-grid {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+.time-slot {
+    display: flex;
+    align-items: flex-start;
+    height: 40px;
+}
+.time {
+    width: 3em; /* Adjust as needed */
+    text-align: right;
+    padding-right: 10px;
+    position: sticky;
+    left: 0;
+    background-color: white;
+    font-weight: bold;
+}
+
+.day-slots {
+    flex: 1;
+    display: flex;
+}
+
+.day-slot {
+    flex: 1;
+    border-bottom: 1px dotted grey;
+    border-right: 1px solid grey;
+    position: relative;
+    height: 40px;
+}
+
+.event {
+    position: absolute;
+    box-sizing: border-box;
+    padding: 2px;
+    border: 1px solid #000;
+    overflow: hidden; /* Hide overflow */
+    white-space: nowrap; /* No text wrapping */
+    text-overflow: ellipsis;
+    z-index: 2;
+}
+
+
+
+.moved-event {
+    /* Add styles for events in the right box */
+    padding: 5px;
+    margin-bottom: 5px; /* Add space between events */
+    border: 1px solid #ccc;
+    background-color: orangered;
+    cursor: default;
+}
+
+.confirm{
+    background-color: #98FB98;
+    margin-left: 4em;
+    padding: 0.5em;
+    font-size: 17px;
+    border-radius: 0.3em;
+    font-weight: 300;
+    width: 50%;
+}
+
+.confirm:hover {
+    transform: scale(1.05);
+    background-color: #7CFC00;
+}
+
+.start-button {
+    background-color: #98FB98;
+    margin-left: 4em;
+    padding: 0.5em;
+    font-size: 13px;
+    border-radius: 0.3em;
+    font-weight: 300;
+    width: 50%;
+}
+
+.start-button:hover {
+    transform: scale(1.05);
+    background-color: #7CFC00;
+}
+
+.start-button-active {
+     background-color: #7CFC00;
+}
+
+/* Example event styles */
+
+
+.event.trueBeam.first {
+    background-color: #8ccfff;
+    width: 50%;
+    border-radius: 0.5em;
+}
+
+.event.trueBeam.second {
+    background-color: #007bff;
+    width: 50%;
+    border-radius: 0.5em;
+}
+
+.event.trueBeam.recommended {
+    background-color: hotpink;
+    border: thick solid black;
+}
+
+.event.vitalBeam {
+    background-color: #ffff8c;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5em;
+}
+
+.event.unique {
+    background-color: lightgreen;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5em;
+}
+
+
+
+
+

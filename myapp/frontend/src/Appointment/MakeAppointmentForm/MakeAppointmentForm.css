@@ -1,3 +1,9 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #f5f5f5;
+}
+
 .header-wrapper {
     display: flex;
     justify-content: space-between;
@@ -9,25 +15,24 @@
 
 }
 
-.appointment-form-wrapper {
-    text-align: center;
-    background-color: #f5f5f5;
-    font-family: 'Open Sans', sans-serif;
-    height: 100vh;
-    margin: 0;
+.appointment-form-section, .search-result-section {
+    flex: 1;
+    padding: 20px;
+    flex-direction: column;
 }
 
-.appointment-form-header {
+.appointment-form-section h2 {
     margin: 0;
     padding: 2em 0.5em 2em 0.5em;
 }
 
 .appointment-form {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
+    margin: 1em 2em 2em 0;
+    padding: 2em;
     background-color: lightskyblue;
     border-radius: 8px;
+    height: 300px;
+    width: 80%;
 }
 
 .appointment-form h2 {
@@ -61,4 +66,21 @@
 
 .appointment-form button:hover {
     background-color: #0056b3;
+}
+
+/* Result Form */
+
+.search-result-section {
+}
+
+.search-result-section h2{
+    margin: 0;
+    padding: 2em 0.5em 2em 0.5em;
+}
+
+.search-result-box{
+    background-color: pink;
+    width: 500px;
+    height: 500px;
+    border-radius: 1em;
 }
