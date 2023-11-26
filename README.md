@@ -7,6 +7,12 @@ and increase the quality of care with ExcellaCare.
 
 ## Demo Highlights 🎬
 
+
+
+https://github.com/otahina/ExcellaCare-Planner-Hackathon-Challenge/assets/108225969/0ebb0e9b-5a21-48c7-90c4-9e61aff8712d
+
+
+
 ## Frontend UI Features 🎨
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 
