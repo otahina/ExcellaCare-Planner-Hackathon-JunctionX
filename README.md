@@ -8,6 +8,7 @@ and increase the quality of care with ExcellaCare.
 ## Demo Highlights 🎬
 
 ## Frontend UI Features 🎨
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 
 **All you need is button clicks! ☑️**
 
@@ -29,6 +30,9 @@ For simplicity, we made few assumptions:
 </details>
 
 ## Backend Features 🤖
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
+
 
 **The power of prompt engineering ⚙️**
 
@@ -91,3 +95,11 @@ pass it to the frontend.
 ## Next Steps 🏃‍♀️
 
 It is better if the system can also recommend which patient should be postponed or cancelled.
+
+## Team Members 👩‍💻👨‍💻
+
+Hina Ota
+- [LinkedIn](https://www.linkedin.com/in/hina-ota/)
+
+Zoltán Singlár
+- [Email](mailto:singlarzoli@gmail.com)
