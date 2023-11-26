@@ -20,7 +20,7 @@ https://github.com/otahina/ExcellaCare-Planner-Hackathon-Challenge/assets/108225
 
 * Time Table for each machine, doctors can see appointments at a glance. 👀
 * Recommended date and time are shown, just need to click and choose! Confirm and all done!
-* Emergency handling: Remove patient and make a space manually.
+* Emergency handling: Remove patient and make a space for an emergency patient. 
 
 ### Technical Details 🧰
 
@@ -31,7 +31,7 @@ https://github.com/otahina/ExcellaCare-Planner-Hackathon-Challenge/assets/108225
 For simplicity, we made few assumptions:
 
 - timetable only shows 5 days. 
-- Treatment should be done every day constantly except for emergency case.
+- Treatment should be done every day constantly unless there is an emergency.
 
 </details>
 
