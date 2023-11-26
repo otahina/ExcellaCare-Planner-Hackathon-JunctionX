@@ -377,7 +377,9 @@ function CheckCalendar() {
                                     {machineName}
                                 </p>
                             ))}
-                            <p className="pid-info">PID(Patient ID)'s text color is black > Patients, red > Inpatients</p>
+                            <p className="pid-info">
+                               PID (Patient ID)'s text color is black → Patients, red → Inpatients
+                            </p>
                         </div>
                     )}
                     <div className="calendar-header">
